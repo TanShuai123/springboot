@@ -45,9 +45,9 @@
             console.log('Connected: ' + frame);
             // 客户端订阅消息的目的地址：此值等于BroadcastCtl中@SendTo注解的里配置的值。
             stompClient.subscribe(
-                '/exchange/rabbitmq/get-response',
+                //'/exchange/rabbitmq/get-response',
                 //'/queue/rabbitmq',
-                //'/amq/queue/rabbitmq2',
+                '/amq/queue/rabbitmq2',
                 //'/topic/get-response',
                 function(respnose){
                     showResponse(JSON.parse(respnose.body).responseMessage);
