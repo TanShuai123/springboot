@@ -44,11 +44,16 @@
             setConnected(true);
             console.log('Connected: ' + frame);
             // 客户端订阅消息的目的地址：此值等于BroadcastCtl中@SendTo注解的里配置的值。
+            /**
+             * '/exchange/rabbitmq/get-response' 路径使用direct 交换机
+             * '/queue/rabbitmq'，'/amq/queue/rabbitmq2' 使用默认交换机
+             * '/topic/get-response.*' 使用topic交换机，支持路由键的模糊匹配
+             */
             stompClient.subscribe(
                 //'/exchange/rabbitmq/get-response',
                 //'/queue/rabbitmq',
-                '/amq/queue/rabbitmq2',
-                //'/topic/get-response',
+                //'/amq/queue/rabbitmq2',
+                '/topic/get-response.*',
                 function(respnose){
                     showResponse(JSON.parse(respnose.body).responseMessage);
                 }

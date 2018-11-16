@@ -21,10 +21,10 @@ public class BroadcastRabbitMQCtl {
     private AtomicInteger count = new AtomicInteger(0);
 
     @MessageMapping("/receive-rabbitmq")
-    @SendTo("/amq/queue/rabbitmq2")
+    //@SendTo("/amq/queue/rabbitmq2")
     //@SendTo("/exchange/rabbitmq/get-response")
     //@SendTo("/queue/rabbitmq")
-    //@SendTo("/topic/get-response")
+    @SendTo("/topic/get-response.text")
     public ResponseMessage broadcast(RequestMessage requestMessage) {
         log.info("receive message = {}", JSONObject.toJSONString(requestMessage));
         ResponseMessage responseMessage = new ResponseMessage();

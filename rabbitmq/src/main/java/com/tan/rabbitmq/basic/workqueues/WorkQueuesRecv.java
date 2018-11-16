@@ -35,14 +35,14 @@ public class WorkQueuesRecv {
                         channel.basicAck(envelope.getDeliveryTag(),false);
 
                         //情况2:对于id=0的消费者者正常应答消息，其它id=0，拒绝此消息并要求重发
-                        if (id == 0) {
+                        /*if (id == 0) {
                             channel.basicAck(envelope.getDeliveryTag(),false);
                         }else{
                             channel.basicReject(envelope.getDeliveryTag(),true);
 
                             //拒绝包含本条delivery_tag 所对应消息在内的所有比该值小的消息（除了已经被 ack 的以外)
                             channel.basicNack(envelope.getDeliveryTag(),false,false);
-                        }
+                        }*/
                     }
                 }
             };
