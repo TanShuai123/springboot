@@ -6,6 +6,8 @@ import com.tan.rabbitmq.basic.publishsubscribe.Publish;
 import com.tan.rabbitmq.basic.publishsubscribe.Subscribe;
 import com.tan.rabbitmq.basic.routing.RoutingRecv;
 import com.tan.rabbitmq.basic.routing.RoutingSend;
+import com.tan.rabbitmq.basic.rpc.RPCClient;
+import com.tan.rabbitmq.basic.rpc.RPCServer;
 import com.tan.rabbitmq.basic.topics.TopicsRecv;
 import com.tan.rabbitmq.basic.topics.TopicsSend;
 import com.tan.rabbitmq.basic.workqueues.WorkQueuesRecv;
@@ -236,6 +238,22 @@ public class BasicTest {
         });
 
         // sleep 10s
+        Thread.sleep(10 * 1000);
+    }
+
+    @Test
+    public void rpc() throws InterruptedException {
+        //rpc服务端先运行，创建队列
+        executorService.submit(()->{
+            RPCServer.execute(rabbitmq_host, rabbitmq_user, rabbitmq_pwd);
+        });
+
+        //rpc客户端
+        executorService.submit(()->{
+            RPCClient.execute(rabbitmq_host, rabbitmq_user, rabbitmq_pwd, "rpc_test");
+        });
+
+        //sleep 10s
         Thread.sleep(10 * 1000);
     }
 }
